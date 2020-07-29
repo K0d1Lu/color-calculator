@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function Buttons(props) {
+export default function Buttons({color, onClickHandler}) {
   return (
     <div>
-      <button>+{props.color}</button>
-      <button>-{props.color}</button>
+      <button onClick={() => onClickHandler['+'](color)}>+{color}</button>
+      <button onClick={() => onClickHandler['-'](color)}>-{color}</button>
     </div>
   )
 }
