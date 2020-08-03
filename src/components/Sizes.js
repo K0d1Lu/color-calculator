@@ -1,4 +1,11 @@
 import React from "react";
+import {
+	InputLabel,
+	Select,
+	MenuItem,
+	Typography,
+	Slider,
+} from "@material-ui/core";
 
 export default function Sizes({ onChangeHandler, onSizeChange }) {
 	const fonts = ["Roboto", "Oswald", "Rowdies"];
@@ -6,34 +13,32 @@ export default function Sizes({ onChangeHandler, onSizeChange }) {
 
 	fonts.forEach((font, i) => {
 		options.push(
-			<option value={font} key={font + i}>
+			<MenuItem value={font} key={i}>
 				{font}
-			</option>
+			</MenuItem>
 		);
 	});
 
 	return (
-		<div>
+		<div className="sizes panel">
 			<div>
-				<select
-					name="fonts"
-					id="font-select"
+				<InputLabel id="select-label">Change font</InputLabel>
+				<Select
+					labelId="select-label"
+					value={"Roboto"}
 					onChange={(e) => onChangeHandler(e.target.value)}
 				>
-					<option value="">Change Font</option>
 					{options}
-				</select>
+				</Select>
 			</div>
-
-			<input
-				type="range"
-				id="fontSize"
-				name="fontSize"
-				min="20"
-				max="100"
-				onChange={(e) => onSizeChange(e.target.value)}
-			/>
-			<label>Font Size</label>
+			<div className="slider">
+				<Typography id="continuous-slider" gutterBottom>
+					Font Size
+				</Typography>
+				<div>
+					<Slider min={40} max={200} onChange={(e, v) => onSizeChange(v)} />
+				</div>
+			</div>
 		</div>
 	);
 }

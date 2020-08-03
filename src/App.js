@@ -19,7 +19,7 @@ function App() {
 	);
 
 	const [fontFamily, changeFontFamily] = useState("Times New Roman");
-	const [fontSize, changeFontSize] = useState("20px");
+	const [fontSize, changeFontSize] = useState("40px");
 
 	const changeColorizedElem = (elem) => {
 		changeElem(elem);
@@ -72,7 +72,7 @@ function App() {
 	const navigate = (e) => {
 		let vw, options, keyframes;
 		switch (e.key) {
-			case "ArrowLeft":
+			case "ArrowRight":
 				if (activeControl === nbControls - 1) {
 					return false;
 				}
@@ -94,7 +94,7 @@ function App() {
 				keyframes = [
 					{
 						transform: "translateX(0%)",
-						filter: "blur(40px)",
+						filter: "blur(20px)",
 					},
 					{
 						transform: `translateX(-${vw}px)`,
@@ -104,7 +104,7 @@ function App() {
 				controls.current.animate(keyframes, options);
 				activeControl++;
 				break;
-			case "ArrowRight":
+			case "ArrowLeft":
 				if (!activeControl) {
 					return false;
 				}
@@ -126,7 +126,7 @@ function App() {
 				keyframes = [
 					{
 						transform: `translateX(-${vw}px)`,
-						filter: "blur(40px)",
+						filter: "blur(20px)",
 					},
 					{
 						transform: `translateX(0)`,
@@ -142,23 +142,21 @@ function App() {
 	};
 
 	return (
-		<div
-			className="App"
-			style={{ backgroundColor: rgbaBg }}
-			tabIndex="1"
-			onKeyDown={navigate}
-		>
-			<div>
-				<span
-					style={{
-						fontFamily: fontFamily,
-						fontSize: fontSize,
-						color: rgbaText,
-					}}
-				>
-					{elemToChange === "background" ? rgbaBg : rgbaText}
-				</span>
+		<div className="App" tabIndex="1" onKeyDown={navigate}>
+			<div className="drawer">
+				<div className="result" style={{ backgroundColor: rgbaBg }}>
+					<span
+						style={{
+							fontFamily: fontFamily,
+							fontSize: fontSize,
+							color: rgbaText,
+						}}
+					>
+						{elemToChange === "background" ? rgbaBg : rgbaText}
+					</span>
+				</div>
 			</div>
+
 			<div ref={controls}>
 				<Controls
 					onChangeColors={changeColorizedElem}
@@ -240,19 +238,22 @@ var colors = {
 		},
 		transparency: {
 			value: 1,
+			val: 10,
 			atMax: true,
 			atMin: false,
 			add() {
-				if (this.value < 1) {
-					this.value += Number.parseFloat(0.1).tofixed(2);
+				if (this.val < 10) {
+					this.val++;
+					this.value = this.val === 10 ? "1" : `0.${this.val}`;
 					this.atMin = false;
 				} else {
 					this.atMax = true;
 				}
 			},
 			min() {
-				if (this.value > 0) {
-					this.value -= Number.parseFloat(0.1).tofixed(2);
+				if (this.val > 0) {
+					this.val--;
+					this.value = this.val ? `0.${this.val}` : "0";
 					this.atMax = false;
 				} else {
 					this.atMin = true;
@@ -326,19 +327,22 @@ var colors = {
 		},
 		transparency: {
 			value: 1,
+			val: 10,
 			atMax: true,
 			atMin: false,
 			add() {
-				if (this.value < 1) {
-					this.value += Number.parseFloat(0.1).tofixed(2);
+				if (this.val < 10) {
+					this.val++;
+					this.value = this.val === 10 ? "1" : `0.${this.val}`;
 					this.atMin = false;
 				} else {
 					this.atMax = true;
 				}
 			},
 			min() {
-				if (this.value > 0) {
-					this.value -= Number.parseFloat(0.1).tofixed(2);
+				if (this.val > 0) {
+					this.val--;
+					this.value = this.val ? `0.${this.val}` : "0";
 					this.atMax = false;
 				} else {
 					this.atMin = true;
