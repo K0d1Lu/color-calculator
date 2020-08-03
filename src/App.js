@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 import Controls from "./components/Controls";
 
-let elemToChange = "background";
+const nbControls = 2;
+let activeControl = 0;
 
 function App() {
+	const controls = useRef(null);
+
 	const [elemToChange, changeElem] = useState("background");
 
 	const [rgbaBg, changeRgbaBg] = useState(
@@ -63,12 +66,88 @@ function App() {
 	};
 
 	const changeSize = (size) => {
-		console.log("into the change", size);
 		changeFontSize(`${size}px`);
 	};
 
+	const navigate = (e) => {
+		let vw, options, keyframes;
+		switch (e.key) {
+			case "ArrowLeft":
+				if (activeControl === nbControls - 1) {
+					return false;
+				}
+				vw = Math.max(
+					document.documentElement.clientWidth || 0,
+					window.innerWidth || 0
+				);
+
+				options = {
+					iterationStart: 0,
+					delay: 0,
+					endDelay: 0,
+					direction: "alternate",
+					duration: 700,
+					fill: "forwards",
+					easing: "ease-out",
+				};
+
+				keyframes = [
+					{
+						transform: "translateX(0%)",
+						filter: "blur(40px)",
+					},
+					{
+						transform: `translateX(-${vw}px)`,
+						filter: "blur(0)",
+					},
+				];
+				controls.current.animate(keyframes, options);
+				activeControl++;
+				break;
+			case "ArrowRight":
+				if (!activeControl) {
+					return false;
+				}
+				vw = Math.max(
+					document.documentElement.clientWidth || 0,
+					window.innerWidth || 0
+				);
+
+				options = {
+					iterationStart: 0,
+					delay: 0,
+					endDelay: 0,
+					direction: "alternate",
+					duration: 700,
+					fill: "forwards",
+					easing: "ease-out",
+				};
+
+				keyframes = [
+					{
+						transform: `translateX(-${vw}px)`,
+						filter: "blur(40px)",
+					},
+					{
+						transform: `translateX(0)`,
+						filter: "blur(0)",
+					},
+				];
+				controls.current.animate(keyframes, options);
+				activeControl--;
+				break;
+			default:
+				return true;
+		}
+	};
+
 	return (
-		<div className="App" style={{ backgroundColor: rgbaBg }}>
+		<div
+			className="App"
+			style={{ backgroundColor: rgbaBg }}
+			tabIndex="1"
+			onKeyDown={navigate}
+		>
 			<div>
 				<span
 					style={{
@@ -80,12 +159,14 @@ function App() {
 					{elemToChange === "background" ? rgbaBg : rgbaText}
 				</span>
 			</div>
-			<Controls
-				onChangeColors={changeColorizedElem}
-				onClickHandler={changeColor}
-				onChangeSizes={changeFont}
-				onSizeChange={changeSize}
-			/>
+			<div ref={controls}>
+				<Controls
+					onChangeColors={changeColorizedElem}
+					onClickHandler={changeColor}
+					onChangeSizes={changeFont}
+					onSizeChange={changeSize}
+				/>
+			</div>
 		</div>
 	);
 }
