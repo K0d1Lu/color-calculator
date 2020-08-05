@@ -1,3 +1,5 @@
+import html2canvas from "html2canvas";
+
 import React, { useState, useRef } from "react";
 import "./App.css";
 import Controls from "./components/Controls";
@@ -7,6 +9,7 @@ let activeControl = 0;
 
 function App() {
 	const controls = useRef(null);
+	const result = useRef(null);
 
 	const [elemToChange, changeElem] = useState("background");
 
@@ -151,10 +154,26 @@ function App() {
 		}
 	};
 
+	const resultCliked = (elem) => {
+		html2canvas(elem).then((canvasElem) => {
+			// Get a base64 data string
+			const imageType = "image/png";
+			let imageData = canvasElem.toDataURL(imageType);
+
+			// Open the data string in the current window
+			document.location.href = imageData.replace(
+				imageType,
+				"image/octet-stream"
+			);
+		});
+	};
+
 	return (
 		<div className="App" tabIndex="1" onKeyDown={navigate}>
 			<div className="drawer">
 				<div
+					ref={result}
+					onClick={(e) => resultCliked(e.target)}
 					className="result"
 					style={{
 						backgroundColor: rgbaBg,
