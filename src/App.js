@@ -18,7 +18,7 @@ function App() {
 		`rgba(${colors.text.red.value}, ${colors.text.green.value}, ${colors.text.blue.value}, ${colors.text.transparency.value})`
 	);
 
-	const [text, changeTextValue] = useState("TOTOT");
+	const [text, changeTextValue] = useState('"Independence is happiness."');
 	const [fontFamily, changeFontFamily] = useState("Times New Roman");
 	const [fontSize, changeFontSize] = useState("40px");
 	const [bgWidth, changeWidthSize] = useState("600px");
