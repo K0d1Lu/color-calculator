@@ -62,6 +62,20 @@ function App() {
 		},
 	};
 
+	const changeColors = (val, color) => {
+		colors[elemToChange][color].value = val;
+
+		if (elemToChange === "background") {
+			changeRgbaBg(
+				`rgba(${colors.background.red.value}, ${colors.background.green.value}, ${colors.background.blue.value}, ${colors.background.transparency.value})`
+			);
+		} else {
+			changeRgbaText(
+				`rgba(${colors.text.red.value}, ${colors.text.green.value}, ${colors.text.blue.value}, ${colors.text.transparency.value})`
+			);
+		}
+	};
+
 	const changeFont = (font) => {
 		changeFontFamily(font);
 
@@ -197,6 +211,7 @@ function App() {
 			<div ref={controls}>
 				<Controls
 					onChangeColors={changeColorizedElem}
+					onColorChange={changeColors}
 					onClickHandler={changeColor}
 					onChangeSizes={changeFont}
 					onTextChange={changeText}

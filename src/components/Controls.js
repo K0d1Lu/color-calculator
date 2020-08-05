@@ -5,6 +5,7 @@ import Sizes from "./Sizes";
 
 export default function Controls({
 	onChangeColors,
+	onColorChange,
 	onClickHandler,
 	onChangeSizes,
 	onSizeChange,
@@ -18,6 +19,7 @@ export default function Controls({
 			<Colors
 				onChangeHandler={onChangeColors}
 				onClickHandler={onClickHandler}
+				onColorChange={onColorChange}
 			/>
 			<Sizes
 				onChangeHandler={onChangeSizes}

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import Radio from "@material-ui/core/Radio";
+import { Radio, Slider } from "@material-ui/core";
 
 import Buttons from "./Buttons";
 
-export default function Colors({ onClickHandler, onChangeHandler }) {
+export default function Colors({
+	onClickHandler,
+	onChangeHandler,
+	onColorChange,
+}) {
 	const [selectedValue, setSelectedValue] = useState("background");
 
 	const handleChange = (event) => {
@@ -33,19 +37,41 @@ export default function Colors({ onClickHandler, onChangeHandler }) {
 			<div className="buttons">
 				<div>
 					<h3>Red</h3>
-					<Buttons color={"red"} onClickHandler={onClickHandler} />
+					<Slider
+						min={0}
+						max={255}
+						defaultValue={0}
+						onChange={(e, v) => onColorChange(v, "red")}
+					/>
 				</div>
 				<div>
 					<h3>Green</h3>
-					<Buttons color={"green"} onClickHandler={onClickHandler} />
+					<Slider
+						min={0}
+						max={255}
+						defaultValue={0}
+						onChange={(e, v) => onColorChange(v, "green")}
+					/>
 				</div>
 				<div>
 					<h3>Blue</h3>
-					<Buttons color={"blue"} onClickHandler={onClickHandler} />
+					<Slider
+						min={0}
+						max={255}
+						defaultValue={0}
+						onChange={(e, v) => onColorChange(v, "blue")}
+					/>
 				</div>
 				<div>
 					<h3>Transparency</h3>
-					<Buttons color={"transparency"} onClickHandler={onClickHandler} />
+					<Slider
+						min={0}
+						max={1}
+						step={0.1}
+						marks
+						defaultValue={1}
+						onChange={(e, v) => onColorChange(v, "transparency")}
+					/>
 				</div>
 			</div>
 		</div>
