@@ -8,6 +8,10 @@ export default function Controls({
 	onClickHandler,
 	onChangeSizes,
 	onSizeChange,
+	onWidthChange,
+	onHeightChange,
+	onRadiusChange,
+	onTextChange,
 }) {
 	return (
 		<div className="controls">
@@ -15,7 +19,14 @@ export default function Controls({
 				onChangeHandler={onChangeColors}
 				onClickHandler={onClickHandler}
 			/>
-			<Sizes onChangeHandler={onChangeSizes} onSizeChange={onSizeChange} />
+			<Sizes
+				onChangeHandler={onChangeSizes}
+				onTextChange={onTextChange}
+				onSizeChange={onSizeChange}
+				onWidthChange={onWidthChange}
+				onHeightChange={onHeightChange}
+				onRadiusChange={onRadiusChange}
+			/>
 		</div>
 	);
 }

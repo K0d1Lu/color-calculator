@@ -18,8 +18,12 @@ function App() {
 		`rgba(${colors.text.red.value}, ${colors.text.green.value}, ${colors.text.blue.value}, ${colors.text.transparency.value})`
 	);
 
+	const [text, changeTextValue] = useState("TOTOT");
 	const [fontFamily, changeFontFamily] = useState("Times New Roman");
 	const [fontSize, changeFontSize] = useState("40px");
+	const [bgWidth, changeWidthSize] = useState("600px");
+	const [bgHeight, changeHeightSize] = useState("400px");
+	const [bgRadius, changeRadiusRatio] = useState("5%");
 
 	const changeColorizedElem = (elem) => {
 		changeElem(elem);
@@ -65,9 +69,15 @@ function App() {
 		document.getElementsByTagName("head")[0].appendChild(link);
 	};
 
-	const changeSize = (size) => {
-		changeFontSize(`${size}px`);
-	};
+	const changeSize = (size) => changeFontSize(`${size}px`);
+
+	const changeHeight = (size) => changeHeightSize(`${size}px`);
+
+	const changeWidth = (size) => changeWidthSize(`${size}px`);
+
+	const changeRadius = (radius) => changeRadiusRatio(`${radius}%`);
+
+	const changeText = (text) => changeTextValue(text);
 
 	const navigate = (e) => {
 		let vw, options, keyframes;
@@ -144,7 +154,15 @@ function App() {
 	return (
 		<div className="App" tabIndex="1" onKeyDown={navigate}>
 			<div className="drawer">
-				<div className="result" style={{ backgroundColor: rgbaBg }}>
+				<div
+					className="result"
+					style={{
+						backgroundColor: rgbaBg,
+						width: bgWidth,
+						height: bgHeight,
+						borderRadius: bgRadius,
+					}}
+				>
 					<span
 						style={{
 							fontFamily: fontFamily,
@@ -152,7 +170,7 @@ function App() {
 							color: rgbaText,
 						}}
 					>
-						{elemToChange === "background" ? rgbaBg : rgbaText}
+						{text}
 					</span>
 				</div>
 			</div>
@@ -162,7 +180,11 @@ function App() {
 					onChangeColors={changeColorizedElem}
 					onClickHandler={changeColor}
 					onChangeSizes={changeFont}
+					onTextChange={changeText}
 					onSizeChange={changeSize}
+					onWidthChange={changeWidth}
+					onHeightChange={changeHeight}
+					onRadiusChange={changeRadius}
 				/>
 			</div>
 		</div>
