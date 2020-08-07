@@ -3,6 +3,7 @@ import html2canvas from "html2canvas";
 import React, { useState, useRef } from "react";
 import "./App.css";
 import Controls from "./components/Controls";
+import Header from "./components/Header/Header";
 
 const nbControls = 2;
 let activeControl = 0;
@@ -24,8 +25,8 @@ function App() {
 	const [text, changeTextValue] = useState('"Independence is happiness."');
 	const [fontFamily, changeFontFamily] = useState("Times New Roman");
 	const [fontSize, changeFontSize] = useState("40px");
-	const [bgWidth, changeWidthSize] = useState("600px");
-	const [bgHeight, changeHeightSize] = useState("400px");
+	const [bgWidth, changeWidthSize] = useState("60%");
+	const [bgHeight, changeHeightSize] = useState("60%");
 	const [bgRadius, changeRadiusRatio] = useState("5%");
 
 	const changeColorizedElem = (elem) => {
@@ -121,11 +122,9 @@ function App() {
 				keyframes = [
 					{
 						transform: "translateX(0%)",
-						filter: "blur(20px)",
 					},
 					{
 						transform: `translateX(-${vw}px)`,
-						filter: "blur(0)",
 					},
 				];
 				controls.current.animate(keyframes, options);
@@ -153,11 +152,9 @@ function App() {
 				keyframes = [
 					{
 						transform: `translateX(-${vw}px)`,
-						filter: "blur(20px)",
 					},
 					{
 						transform: `translateX(0)`,
-						filter: "blur(0)",
 					},
 				];
 				controls.current.animate(keyframes, options);
@@ -168,8 +165,8 @@ function App() {
 		}
 	};
 
-	const resultCliked = (elem) => {
-		html2canvas(elem).then((canvasElem) => {
+	const download = () => {
+		html2canvas(result.current).then((canvasElem) => {
 			// Get a base64 data string
 			const imageType = "image/png";
 			let imageData = canvasElem.toDataURL(imageType);
@@ -184,10 +181,10 @@ function App() {
 
 	return (
 		<div className="App" tabIndex="1" onKeyDown={navigate}>
+			<Header download={download} />
 			<div className="drawer">
 				<div
 					ref={result}
-					onClick={(e) => resultCliked(e.target)}
 					className="result"
 					style={{
 						backgroundColor: rgbaBg,
