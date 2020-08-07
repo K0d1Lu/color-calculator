@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Radio, Slider } from "@material-ui/core";
 
-import Buttons from "./Buttons";
-
 export default function Colors({
 	onClickHandler,
 	onChangeHandler,
