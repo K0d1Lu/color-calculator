@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Radio, Slider } from "@material-ui/core";
 
 export default function Colors({ onChangeHandler, onColorChange }) {
@@ -38,9 +38,9 @@ export default function Colors({ onChangeHandler, onColorChange }) {
 				/>
 				<label>Text</label>
 			</div>
-			<div className="buttons">
-				<div>
-					<h3>Red</h3>
+			<div className="ranges">
+				<div className="range">
+					<p>Red</p>
 					<Slider
 						min={0}
 						max={255}
@@ -55,8 +55,8 @@ export default function Colors({ onChangeHandler, onColorChange }) {
 						}}
 					/>
 				</div>
-				<div>
-					<h3>Green</h3>
+				<div className="range">
+					<p>Green</p>
 					<Slider
 						min={0}
 						max={255}
@@ -71,8 +71,8 @@ export default function Colors({ onChangeHandler, onColorChange }) {
 						}}
 					/>
 				</div>
-				<div>
-					<h3>Blue</h3>
+				<div className="range">
+					<p>Blue</p>
 					<Slider
 						min={0}
 						max={255}
@@ -87,8 +87,8 @@ export default function Colors({ onChangeHandler, onColorChange }) {
 						}}
 					/>
 				</div>
-				<div>
-					<h3>Transparency</h3>
+				<div className="range">
+					<p>Transparency</p>
 					<Slider
 						min={0}
 						max={1}

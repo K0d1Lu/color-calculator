@@ -81,28 +81,51 @@ body {
 	background-color: #fff;
 }
 
-.sizes {
-	display: flex;
-	justify-content: space-evenly;
-}
-
 .colors {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 }
 
-.buttons {
+.ranges {
 	display: flex;
 	justify-content: space-evenly;
 }
 
-button {
-	font-size: 25px;
-	width: 100px;
-	height: 50px;
+.range {
+	font-size: 18px;
+	width: 17%;
 }
 
+.radios {
+	font-size: 20px;
+}
+
+.sizes {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.fonts,
 .slider {
-	width: 200px;
+	margin-top: 2em;
+	width: 25%;
+}
+
+.fonts > div {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.slider > div {
+	margin: 10px;
+}
+
+.change-font {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.change-font > div {
+	width: 80%;
 }

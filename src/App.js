@@ -22,7 +22,7 @@ function App() {
 		`rgba(${colors.text.red.value}, ${colors.text.green.value}, ${colors.text.blue.value}, ${colors.text.transparency.value})`
 	);
 
-	const [text, changeTextValue] = useState('"Independence is happiness."');
+	const [text, changeTextValue] = useState("“Mind if I do a J?” — The Dude");
 	const [fontFamily, changeFontFamily] = useState("Times New Roman");
 	const [fontSize, changeFontSize] = useState("40px");
 	const [bgWidth, changeWidthSize] = useState("60%");
@@ -82,7 +82,10 @@ function App() {
 
 		const link = document.createElement("link");
 		link.rel = "stylesheet";
-		link.href = `https://fonts.googleapis.com/css2?family=${font}:wght@300&display=swap`;
+		link.href = `https://fonts.googleapis.com/css2?family=${font.replace(
+			" ",
+			"+"
+		)}:wght@300&display=swap`;
 
 		document.getElementsByTagName("head")[0].appendChild(link);
 	};

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-	InputLabel,
-	Select,
-	MenuItem,
-	Typography,
-	Slider,
-	TextField,
-} from "@material-ui/core";
+import { Select, Slider, TextField } from "@material-ui/core";
 
 export default function Sizes({
 	onChangeHandler,
@@ -16,30 +9,27 @@ export default function Sizes({
 	onRadiusChange,
 	onTextChange,
 }) {
-	const fonts = ["Roboto", "Oswald", "Rowdies"];
-	let options = [];
+	const fonts = [
+		"Roboto",
+		"Open Sans",
+		"Lato",
+		"Source Sans Pro",
+		"Oswald",
+		"Rowdies",
+	];
+	let options = [<option aria-label="None" value="" key={0} />];
 
 	fonts.forEach((font, i) => {
 		options.push(
-			<MenuItem value={font} key={i}>
+			<option value={font} key={i + 1}>
 				{font}
-			</MenuItem>
+			</option>
 		);
 	});
 
 	return (
 		<div className="sizes panel">
-			<div>
-				<div>
-					<InputLabel id="select-label">Change font</InputLabel>
-					<Select
-						labelId="select-label"
-						value={"Roboto"}
-						onChange={(e) => onChangeHandler(e.target.value)}
-					>
-						{options}
-					</Select>
-				</div>
+			<div className="fonts">
 				<div>
 					<TextField
 						id="outlined-basic"
@@ -48,18 +38,25 @@ export default function Sizes({
 						onChange={(e, v) => onTextChange(e.target.value)}
 					/>
 				</div>
-			</div>
-			<div className="slider">
-				<Typography id="continuous-slider" gutterBottom>
-					Font Size
-				</Typography>
+
+				<div className="change-font">
+					<Select
+						native
+						value={"Roboto"}
+						onChange={(e) => onChangeHandler(e.target.value)}
+					>
+						{options}
+					</Select>
+				</div>
+
 				<div>
+					<p>Font Size</p>
 					<Slider min={40} max={200} onChange={(e, v) => onSizeChange(v)} />
 				</div>
-				<Typography id="continuous-slider" gutterBottom>
-					Background width
-				</Typography>
+			</div>
+			<div className="slider">
 				<div>
+					<p>Background width</p>
 					<Slider
 						min={0}
 						max={1920}
@@ -67,10 +64,9 @@ export default function Sizes({
 						onChange={(e, v) => onWidthChange(v)}
 					/>
 				</div>
-				<Typography id="continuous-slider" gutterBottom>
-					Background height
-				</Typography>
+
 				<div>
+					<p>Background height</p>
 					<Slider
 						min={0}
 						max={1080}
@@ -78,16 +74,17 @@ export default function Sizes({
 						onChange={(e, v) => onHeightChange(v)}
 					/>
 				</div>
-				<Typography id="continuous-slider" gutterBottom>
-					Background radius
-				</Typography>
+
 				<div>
-					<Slider
-						min={0}
-						max={100}
-						defaultValue={5}
-						onChange={(e, v) => onRadiusChange(v)}
-					/>
+					<p>Background radius</p>
+					<div>
+						<Slider
+							min={0}
+							max={100}
+							defaultValue={5}
+							onChange={(e, v) => onRadiusChange(v)}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
