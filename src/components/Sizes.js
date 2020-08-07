@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Select, Slider, TextField } from "@material-ui/core";
 
 export default function Sizes({
@@ -9,6 +9,8 @@ export default function Sizes({
 	onRadiusChange,
 	onTextChange,
 }) {
+	const [font, changeFont] = useState("Roboto");
+
 	const fonts = [
 		"Roboto",
 		"Open Sans",
@@ -35,15 +37,20 @@ export default function Sizes({
 						id="outlined-basic"
 						label="Change Text"
 						variant="outlined"
-						onChange={(e, v) => onTextChange(e.target.value)}
+						onChange={(e, v) => {
+							onTextChange(e.target.value);
+						}}
 					/>
 				</div>
 
 				<div className="change-font">
 					<Select
 						native
-						value={"Roboto"}
-						onChange={(e) => onChangeHandler(e.target.value)}
+						value={font}
+						onChange={(e) => {
+							changeFont(e.target.value);
+							onChangeHandler(e.target.value);
+						}}
 					>
 						{options}
 					</Select>
@@ -51,7 +58,12 @@ export default function Sizes({
 
 				<div>
 					<p>Font Size</p>
-					<Slider min={40} max={200} onChange={(e, v) => onSizeChange(v)} />
+					<Slider
+						min={0}
+						max={200}
+						defaultValue={40}
+						onChange={(e, v) => onSizeChange(v)}
+					/>
 				</div>
 			</div>
 			<div className="slider">

@@ -9,6 +9,7 @@ const nbControls = 2;
 let activeControl = 0;
 
 function App() {
+	let x, moving;
 	const controls = useRef(null);
 	const result = useRef(null);
 
@@ -102,6 +103,7 @@ function App() {
 
 	const navigate = (e) => {
 		let vw, options, keyframes;
+
 		switch (e.key) {
 			case "ArrowRight":
 				if (activeControl === nbControls - 1) {
@@ -208,7 +210,24 @@ function App() {
 				</div>
 			</div>
 
-			<div ref={controls}>
+			<div
+				ref={controls}
+				className="test"
+				onTouchStart={(e) => {
+					x = e.touches[0].clientX;
+				}}
+				onTouchMove={(e) => {
+					if (!moving) {
+						if (x < e.touches[0].clientX) {
+							navigate({ key: "ArrowLeft" });
+						} else {
+							navigate({ key: "ArrowRight" });
+						}
+						moving = true;
+					}
+				}}
+				onTouchEnd={() => (moving = false)}
+			>
 				<Controls
 					onChangeColors={changeColorizedElem}
 					onColorChange={changeColors}
