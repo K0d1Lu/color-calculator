@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import "./App.css";
 import Controls from "./components/Controls";
 import Header from "./components/Header/Header";
+import MobileStepper from '@material-ui/core/MobileStepper';
 
 const nbControls = 2;
 let activeControl = 0;
@@ -29,6 +30,7 @@ function App() {
 	const [bgWidth, changeWidthSize] = useState("60%");
 	const [bgHeight, changeHeightSize] = useState("60%");
 	const [bgRadius, changeRadiusRatio] = useState("5%");
+	const [activeStep, setActiveStep] = useState(0);
 
 	const changeColorizedElem = (elem) => {
 		changeElem(elem);
@@ -134,6 +136,7 @@ function App() {
 				];
 				controls.current.animate(keyframes, options);
 				activeControl++;
+				setActiveStep((prevActiveStep) => prevActiveStep + 1);
 				break;
 			case "ArrowLeft":
 				if (!activeControl) {
@@ -164,6 +167,7 @@ function App() {
 				];
 				controls.current.animate(keyframes, options);
 				activeControl--;
+				setActiveStep((prevActiveStep) => prevActiveStep - 1);
 				break;
 			default:
 				return true;
@@ -209,6 +213,14 @@ function App() {
 					</span>
 				</div>
 			</div>
+
+			<MobileStepper
+      			variant="dots"
+      			steps={2}
+      			position="static"
+      			activeStep={activeStep}
+      			className="steps"
+    		/>
 
 			<div
 				ref={controls}

@@ -67,6 +67,11 @@ body {
 	overflow: hidden;
 }
 
+.steps {
+	background: none !important;
+	justify-content: center !important;
+}
+
 .controls {
 	width: 200vw;
 	display: flex;
